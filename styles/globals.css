@@ -1,6 +1,14 @@
+@font-face {
+    font-family: 'Comic Neue';
+    src: url('/ComicNeue-Light.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
 body {
     background-color: black;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
     color: #00ffff;
     margin: 0;
     padding: 0;
@@ -88,3 +96,14 @@ body.home-page {
   body.rsvp-page {
     cursor: url('/red100.png') 16 16, auto;  
   }
+  
+  .firework-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 1;
+  }
+  

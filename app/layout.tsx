@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '../styles/globals.css';
 import BodyClassController from './BodyClassController'; // Import the client-side component
+import Fireworks from './Fireworks';
 
 export const metadata: Metadata = {
   title: 'Brianna & Conor',
@@ -24,6 +25,8 @@ export default function RootLayout({
           <a href="/rsvp">RSVP</a>
         </nav>
         <BodyClassController />
+        
+        <Fireworks />
 
         {children}
 
