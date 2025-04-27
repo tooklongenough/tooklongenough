@@ -1,0 +1,90 @@
+body {
+    background-color: black;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #00ffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  header {
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
+    color: #39ff14;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background: #222;
+    padding: 0.5rem;
+  }
+  
+  nav a {
+    color: #ff00ff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 400px;
+    margin: 1rem auto;
+  }
+  
+  input, textarea {
+    padding: 0.5rem;
+    border: 2px solid #ff00ff;
+    background: black;
+    color: #00ffff;
+  }
+  
+  button {
+    background: #ff00ff;
+    color: black;
+    font-weight: bold;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+  }
+  
+  /* Default cursor style */
+body {
+    cursor: url('/sparkleheart.png') 16 16, auto;  
+  }
+  
+  /* Specific page cursors with forced size */
+body.home-page {
+    cursor: url('/sparkleheart.png') 16 16, auto; 
+  }
+ 
+  body.bride-page {
+    cursor: url('/hearteyes.png') 16 16, auto; 
+  }
+  
+  body.groom-page {
+    cursor: url('/hearteyes.png') 16 16, auto;  
+  }
+  
+  body.location-page {
+    cursor: url('/castle.png') 16 16, auto; 
+  }
+  
+  body.rsvp-page {
+    cursor: url('/red100.png') 16 16, auto;  
+  }
