@@ -1,8 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const colors = ['#ff00ff', '#00ffff', '#ffff00', '#39ff14']; // Neon pink, cyan, yellow, neon green
+    let colors;
     const sparkles = 50; // Number of sparkles
     const trails = [];
-  
+
+    // Function to set colors based on the current theme
+    const setGlitterColors = () => {
+        const theme = document.body.classList[0]; // Check the current theme class
+
+        if (theme === 'theme-neon') {
+            colors = ['#ff00ff', '#00ffff', '#ffff00', '#39ff14']; // Neon pink, cyan, yellow, neon green
+        } else if (theme === 'theme-vapourwave') {
+            colors = ['#ffafcc', '#cdb4db', '#a2d2ff', '#5c5c8a']; // Pastel pinks, lavender, and soft blue
+        } else if (theme === 'theme-electric') {
+            colors = ['#1e90ff', '#32cd32', '#00ff7f', '#ffff00']; // Electric blue, neon green, yellow
+        } else if (theme === 'theme-classical') {
+            colors = ['#ffdf00', '#b38d3f', '#ff5c8d', '#7f7f00']; // Gold, brown, red, dark green
+        } else {
+            colors = ['#ff00ff', '#00ffff', '#ffff00', '#39ff14']; // Default to neon colors if theme is not set
+        }
+
+         // Update the existing trails with the new colors
+        trails.forEach((trail, index) => {
+            trail.style.backgroundColor = colors[index % colors.length];
+        });
+    };
+
+    setGlitterColors(); // Set the initial colors when page loads
+
     // Create the sparkles (neon circles)
     for (let i = 0; i < sparkles; i++) {
       const trail = document.createElement('div');
@@ -36,5 +60,13 @@ document.addEventListener('DOMContentLoaded', function () {
   
       current = (current + 1) % sparkles;
     });
+
+    // MutationObserver to watch for theme changes
+    const observer = new MutationObserver(() => {
+        setGlitterColors(); // Refresh glitter colors when theme changes dynamically
+    });
+
+    // Observe changes to the classList of the <body> tag
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   });
   

@@ -1,32 +1,40 @@
-"use client"; // This marks the component as client-side
+'use client';
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation"; // Use Next.js navigation hook
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-const BodyClassController = () => {
+export default function Body({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [pageClass, setPageClass] = useState('');
 
   useEffect(() => {
-    let pageClass = '';
+    let className = '';
 
-    // Check the current path and assign the corresponding page class
     if (pathname === '/') {
-      pageClass = 'home-page';
+      className = 'home-page';
     } else if (pathname.startsWith('/bride')) {
-      pageClass = 'bride-page';
+      className = 'bride-page';
     } else if (pathname.startsWith('/groom')) {
-      pageClass = 'groom-page';
+      className = 'groom-page';
     } else if (pathname.startsWith('/location')) {
-      pageClass = 'location-page';
+      className = 'location-page';
     } else if (pathname.startsWith('/rsvp')) {
-      pageClass = 'rsvp-page';
+      className = 'rsvp-page';
+    } else if (pathname.startsWith('/settings')) {
+      className = 'settings-page';
     }
 
-    // Set the body class
-    document.body.className = pageClass;
-  }, [pathname]); // Re-run when the pathname changes
+    // Check for saved theme
+    const savedTheme = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('theme='))
+      ?.split('=')[1];
 
-  return null; // This component doesn't render anything itself
-};
+    const themeClass = savedTheme || 'theme-neon';
 
-export default BodyClassController;
+    // Combine theme + page class
+    setPageClass(`${themeClass} ${className}`);
+  }, [pathname]);
+
+  return <body className={pageClass}>{children}</body>;
+}

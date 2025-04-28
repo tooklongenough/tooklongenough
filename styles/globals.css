@@ -5,72 +5,204 @@
     font-style: normal;
   }
   
+/* globals.css */
 
+/* === Base Styles === */
 body {
-    background-color: black;
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
-    color: #00ffff;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    font-family: sans-serif;
   }
   
+  /* Header */
   header {
     text-align: center;
     font-size: 2rem;
-    padding: 1rem;
-    color: #39ff14;
+    margin: 1rem 0;
   }
   
+  /* Menu */
   nav {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    background: #222;
+    padding: 1rem;
+    width: 45%;
+    margin: 0 auto;  /* Center the nav */
+  }
+  
+  /* Form fields (like RSVP) */
+  input, textarea, select {
     padding: 0.5rem;
+    border-radius: 0.5rem;
   }
   
-  nav a {
+  button {
+    padding: 0.5rem 1rem;
+    border: 2px solid currentColor;
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  button:hover {
+    background: currentColor;
+    color: var(--background-color, #fff);
+  }
+  
+  main {
+    width: 60%;
+    margin: 0 auto;  /* Centers the content */
+  }
+  
+  main h2 {
+    text-align: center; /* Center-align the headers */
+    font-size: 2rem; /* Larger size for headers */
+    margin-bottom: 1rem; /* Some space below */
+  }
+
+  /* === Theme: Neon === */
+  .theme-neon {
+    background: black;
+    color: #00ff00;
+    font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+  }
+  
+  .theme-neon header {
     color: #ff00ff;
-    font-weight: bold;
-    text-decoration: none;
+    text-shadow: 0 0 10px #ff00ff;
   }
   
-  nav a:hover {
-    text-decoration: underline;
+  .theme-neon nav {
+    background: #111;
+    border: 2px dashed #00ff00;
   }
   
+  .theme-neon main {
+    border: 2px dashed #00ff00;
+    margin-top: 20px;
+    padding: 1rem;
+  }
+
+  /* === Theme: Classical === */
+  .theme-classical {
+    background: #f5f0e6; /* soft gold */
+    color: #4b2e1e; /* dark brown */
+    font-family: 'Dancing Script', cursive, serif; /* Nice elegant cursive */
+  }
+  
+  .theme-classical header {
+    font-family: 'Dancing Script', cursive, serif;
+    color: #4b2e1e;
+  }
+  
+  .theme-classical nav {
+    background: #fff8dc; /* light parchment color */
+    border: 1px solid #4b2e1e;
+  }
+  
+  .theme-classical input,
+  .theme-classical textarea,
+  .theme-classical select {
+    border: 1px solid #4b2e1e;
+  }
+  
+  .theme-classical button {
+    font-family: var(--font-dancing-script);
+    border-color: #5a3e36; /* Dark brown */
+  }
+
+  /* === Theme: Electric Blue === */
+  .theme-electric {
+    background: #0a0a23; /* dark navy */
+    color: #00bfff; /* electric blue */
+    font-family: 'Share Tech Mono', monospace;
+  }
+  
+  .theme-electric header {
+    color: #00bfff;
+    border-bottom: 2px solid #00bfff;
+    padding-bottom: 0.5rem;
+  }
+  
+  .theme-electric nav,
+  .theme-electric main {
+    background: #0a0a23;
+    border: 2px solid #00bfff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 60%;
+    margin-bottom: 20px;
+  }
+  
+  .theme-electric input,
+  .theme-electric textarea,
+  .theme-electric select {
+    background: #0f0f2f;
+    color: #00bfff;
+    border: 1px solid #00bfff;
+  }
+  
+
+  .theme-electric button {
+    font-family: var(--font-share-tech-mono);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+
+  /*== Theme: Vapourwave ==*/
+  .theme-vapourwave {
+    --background-color: #ffe5ec; /* Light pink */
+    --font-color: #5c5c8a; /* Muted purple-blue */
+    --accent-color: #a2d2ff; /* Light cyan */
+    --header-color: #ffafcc; /* Bright pink for header */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    
+    background: linear-gradient(135deg, #ffafcc 0%, #cdb4db 50%, #a2d2ff 100%);
+    color: var(--font-color);
+  }
+  
+  .theme-vapourwave header {
+    color: var(--header-color);
+    text-shadow: 2px 2px var(--accent-color);
+  }
+  
+  .theme-vapourwave nav {
+    background-color: var(--accent-color);
+    border: 2px solid var(--font-color);
+  }
+  
+  .theme-vapourwave a {
+    color: var(--font-color);
+  }
+  
+  .theme-vapourwave a:hover {
+    color: var(--header-color);
+  }
+
+  .theme-vapourwave button {
+    border-color: #a2d2ff; /* light blue */
+    background-color: #ffe5ec;
+    color: #5c5c8a;
+  }
+
   @media (max-width: 768px) {
     nav {
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
+
+    main {
+        width: 100%;
+      }
   }
   
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 400px;
-    margin: 1rem auto;
-  }
-  
-  input, textarea {
-    padding: 0.5rem;
-    border: 2px solid #ff00ff;
-    background: black;
-    color: #00ffff;
-  }
-  
-  button {
-    background: #ff00ff;
-    color: black;
-    font-weight: bold;
-    padding: 0.5rem;
-    cursor: pointer;
-    border: none;
-  }
-  
+
   /* Default cursor style */
 body {
     cursor: url('/sparkleheart.png') 16 16, auto;  
@@ -96,7 +228,7 @@ body.home-page {
   body.rsvp-page {
     cursor: url('/red100.png') 16 16, auto;  
   }
-  
+
   .firework-particle {
     position: absolute;
     width: 6px;

@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--accent-color);
+  }
+  
+  .select {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: var(--background-color);
+    color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+  }
+  
