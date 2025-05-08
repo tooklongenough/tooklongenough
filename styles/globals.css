@@ -239,3 +239,152 @@ body.home-page {
     opacity: 1;
   }
   
+  /* Location page specific styles */
+  .location-media-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .location-media {
+    width: 400px;
+    height: 300px;
+  }
+
+  .address-details, .venue-details, .parking-details {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .address-details h3, .venue-details h3, .parking-details h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .venue-section {
+    margin-bottom: 2rem;
+  }
+
+  .venue-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .venue-section h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color, inherit);
+  }
+
+  .venue-section p {
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .parking-section {
+    margin-bottom: 2rem;
+  }
+
+  .parking-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .parking-section h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color, inherit);
+  }
+
+  .parking-section p {
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+  }
+
+  .parking-section ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .parking-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  
+  /* Home page specific styles */
+  .couple-intro {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .main-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+  }
+
+  .profile-link {
+    padding: 1rem 2rem;
+    border: 2px solid currentColor;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+
+  .profile-link:hover {
+    background: currentColor;
+    color: var(--background-color, #fff);
+    transform: translateY(-2px);
+  }
+
+  .social-section {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .social-section a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  .social-section a:hover {
+    text-decoration: underline;
+  }
+
+  .ai-jokes {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .ai-jokes h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .celebration {
+    text-align: center;
+    margin: 3rem 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .countdown {
+    text-align: center;
+    font-size: 1.4rem;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+  

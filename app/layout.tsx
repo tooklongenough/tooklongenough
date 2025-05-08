@@ -27,24 +27,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dancingScript.variable} ${shareTechMono.variable}`}>
+    <html lang="en" className={dancingScript.variable + ' ' + shareTechMono.variable}>
       <body>
-        <header>💖 Brianna & Conor's Wedding 💖</header>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/bride">Meet the Bride</a>
-          <a href="/groom">Meet the Groom</a>
-          <a href="/location">St. Norbert Art Centre</a>
-          <a href="/rsvp">RSVP</a>
-          <a href="/registry">Registry</a>
-          <a href="/settings">Settings</a>
-        </nav>
-        <BodyClassController>{children}</BodyClassController>
-        
-        <Fireworks />
-
-        {/* Sparkly Glitter Mouse Trail */}
-        <script src="/glitter.js" />
+        <BodyClassController>
+          <header>💖 Brianna & Conor's Wedding 💖</header>
+          <nav>
+            <a href="/">Home</a>
+            <a href="/bride">Meet the Bride</a>
+            <a href="/groom">Meet the Groom</a>
+            <a href="/location">St. Norbert Art Centre</a>
+            <a href="/rsvp">RSVP</a>
+            <a href="/registry">Registry</a>
+            <a href="/settings">Settings</a>
+          </nav>
+          {children}
+          <Fireworks />
+          {/* Sparkly Glitter Mouse Trail */}
+          <script src="/glitter.js" />
+        </BodyClassController>
       </body>
     </html>
   );

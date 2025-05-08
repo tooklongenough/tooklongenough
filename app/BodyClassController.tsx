@@ -1,11 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-export default function Body({ children }: { children: React.ReactNode }) {
+export default function BodyClassController({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [pageClass, setPageClass] = useState('');
 
   useEffect(() => {
     let className = '';
@@ -32,9 +31,14 @@ export default function Body({ children }: { children: React.ReactNode }) {
 
     const themeClass = savedTheme || 'theme-neon';
 
-    // Combine theme + page class
-    setPageClass(`${themeClass} ${className}`);
+    // Apply classes to body
+    document.body.className = `${themeClass} ${className}`;
+
+    // Cleanup function
+    return () => {
+      document.body.className = '';
+    };
   }, [pathname]);
 
-  return <body className={pageClass}>{children}</body>;
+  return <>{children}</>;
 }
