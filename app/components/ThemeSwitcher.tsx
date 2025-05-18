@@ -35,7 +35,7 @@ export default function ThemeSwitcher() {
 
   return (
     <div className={styles.wrapper}>
-      <label htmlFor="theme-select" className={styles.label}>
+      <label htmlFor="theme-select" className="setting-item">
         Choose Theme:
       </label>
       <select

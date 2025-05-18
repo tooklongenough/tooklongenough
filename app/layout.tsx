@@ -51,14 +51,16 @@ export default function RootLayout({
             <a href="/registry">Registry</a>
             <a href="/settings">Settings</a>
           </nav>
-          {firstName && lastName && (
-            <div className="text-right pr-4 py-2 text-sm text-gray-600">
-              Visiting as {firstName} {lastName}.{' '}
-              <a href="/settings" className="text-blue-500 hover:underline">
-                Not you? Please tell us who you are on the Settings Page!
-              </a>
-            </div>
-          )}
+          <div className="logged-in-as">
+            {firstName && lastName && (
+              <div className="text-right pr-4 py-2 text-sm text-gray-600">
+                Visiting as {firstName} {lastName}.{' '}
+                <a href="/settings" className="text-blue-500 hover:underline">
+                  Not you? Please tell us who you are on the Settings Page!
+                </a>
+              </div>
+            )}
+          </div>
           {children}
           <Fireworks />
           {/* Sparkly Glitter Mouse Trail */}

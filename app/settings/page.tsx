@@ -145,23 +145,15 @@ export default function SettingsPage() {
     <main>
       <div className="settings-page">
         <h2>Settings</h2>
-        <div className="setting-item">
-          <label htmlFor="api-url">API URL:</label>
-          <input
-            id="api-url"
-            type="text"
-            value={apiUrl}
-            disabled
-            className="w-full p-2 border rounded bg-gray-100"
-          />
-        </div>
-
+        
         <div className="mt-8 p-6 border rounded-lg shadow-sm">
           <h3 className="text-xl font-semibold mb-2">Who are you?</h3>
           <p className="text-gray-600 mb-4">
             You are free to browse anonymously, but some functionality such as RSVP will not work as well if doing so.
           </p>
-
+          <p>
+            The pass phrase will be remembered on this device.  You can enter it on any device to continue as yourself.
+          </p>
           {isLoading ? (
             <div className="flex justify-center items-center h-32">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
@@ -177,9 +169,8 @@ export default function SettingsPage() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="first-name" className="block mb-1">First Name</label>
+            <form onSubmit={handleSubmit} className="setting-form">
+                <label htmlFor="first-name" className="block mb-1">First Name:</label>
                 <input
                   id="first-name"
                   type="text"
@@ -188,9 +179,7 @@ export default function SettingsPage() {
                   onChange={e => setGuest(prev => ({ ...prev, first_name: e.target.value }))}
                   className="w-full p-2 border rounded"
                 />
-              </div>
-              <div>
-                <label htmlFor="last-name" className="block mb-1">Last Name</label>
+                <label htmlFor="last-name" className="block mb-1">Last Name:</label>
                 <input
                   id="last-name"
                   type="text"
@@ -199,9 +188,7 @@ export default function SettingsPage() {
                   onChange={e => setGuest(prev => ({ ...prev, last_name: e.target.value }))}
                   className="w-full p-2 border rounded"
                 />
-              </div>
-              <div>
-                <label htmlFor="pass-phrase" className="block mb-1">Pass Phrase (at least 3 words)</label>
+                <label htmlFor="pass-phrase" className="block mb-1">Pass Phrase (at least 3 words):</label>
                 <input
                   id="pass-phrase"
                   type="text"
@@ -210,7 +197,6 @@ export default function SettingsPage() {
                   onChange={e => setGuest(prev => ({ ...prev, pass_phrase: e.target.value }))}
                   className="w-full p-2 border rounded"
                 />
-              </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -221,9 +207,20 @@ export default function SettingsPage() {
             </form>
           )}
         </div>
-
+        <h3>Other Settings</h3>
         <div className="mt-8">
           <ThemeSwitcher />
+        </div>
+
+        <div className="setting-item">
+          <label htmlFor="api-url">API URL:</label>
+          <input
+            id="api-url"
+            type="text"
+            value={apiUrl}
+            disabled
+            className="w-full p-2 border rounded bg-gray-100"
+          />
         </div>
       </div>
     </main>

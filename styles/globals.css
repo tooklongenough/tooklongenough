@@ -81,7 +81,8 @@ body {
     border: 2px dashed #00ff00;
   }
   
-  .theme-neon main {
+  .theme-neon main,
+  .theme-neon form {
     border: 2px dashed #00ff00;
     margin-top: 20px;
     padding: 1rem;
@@ -129,7 +130,8 @@ body {
   }
   
   .theme-electric nav,
-  .theme-electric main {
+  .theme-electric main,
+  .theme-electric form {
     background: #0a0a23;
     border: 2px solid #00bfff;
     padding: 1rem;
@@ -388,3 +390,46 @@ body.home-page {
     border-radius: 8px;
   }
   
+  /* Settings page styles */
+  .setting-item {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .setting-item label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .setting-item input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+  }
+
+  .setting-item input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+  
+  .setting-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .setting-form label {
+      grid-column-start: 1;
+  }
+
+  .setting-form button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .logged-in-as{
+    text-align: center;
+    margin-top: 1rem;
+  }

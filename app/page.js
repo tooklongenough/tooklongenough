@@ -25,19 +25,12 @@ export default function Home() {
       </div>
 
       <div className="social-section">
-        <h3>Follow Our Journey</h3>
+        <h3>For site updates, follow our journey on Bluesky</h3>
         <p>
           <a href="https://bsky.app/profile/tooklongenough.ca" target="_blank" rel="noopener noreferrer">
             @tooklongenough.ca on Bluesky 🦋
           </a>
         </p>
-      </div>
-
-      <div className="ai-jokes">
-        <h3>AI-Generated Wedding Website? 🤖</h3>
-        <p>Yes, this website was created by AI! As a developer, Conor thought it would be hilarious to let the robots do the work for once. 😄</p>
-        <p>Don't worry though - the wedding itself will be 100% human-generated (unless the robots take over by 2025 🤖).</p>
-        <p>Fun fact: This AI spent more time picking emojis than writing the code. Priorities! 🎯</p>
       </div>
 
       <div className="celebration">
