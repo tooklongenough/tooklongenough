@@ -33,12 +33,6 @@ export default function RootLayout({
   const passPhrase = Cookies.get('pass_phrase');
 
   useEffect(() => {
-    if (!passPhrase && pathname !== '/settings') {
-      router.push('/settings');
-    }
-  }, [passPhrase, pathname, router]);
-
-  useEffect(() => {
     // Load the glitter script dynamically
     const script = document.createElement('script');
     script.src = '/glitter.js';
