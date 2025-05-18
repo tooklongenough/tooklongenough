@@ -3,6 +3,7 @@
 import '../styles/globals.css';
 import BodyClassController from './BodyClassController';
 import Fireworks from './Fireworks';
+import Glitter from './Glitter';
 import { Dancing_Script, Share_Tech_Mono } from 'next/font/google';
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -37,6 +38,19 @@ export default function RootLayout({
     }
   }, [passPhrase, pathname, router]);
 
+  useEffect(() => {
+    // Load the glitter script dynamically
+    const script = document.createElement('script');
+    script.src = '/glitter.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup: remove the script when component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <html lang="en" className={dancingScript.variable + ' ' + shareTechMono.variable}>
       <body>
@@ -63,8 +77,7 @@ export default function RootLayout({
           </div>
           {children}
           <Fireworks />
-          {/* Sparkly Glitter Mouse Trail */}
-          <script src="/glitter.js" />
+          <Glitter />
         </BodyClassController>
       </body>
     </html>
