@@ -13,7 +13,7 @@ interface Guest {
 
 export default function SettingsPage() {
   const router = useRouter();
-  const [apiUrl] = useState(process.env.NEXT_PUBLIC_SUPABASE_API_URL || '');
+  const [apiUrl] = useState(`${process.env.NEXT_PUBLIC_SUPABASE_API_URL}/functions/v1` || '');
   const [apiKey] = useState(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
