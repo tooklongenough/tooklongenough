@@ -1,17 +1,16 @@
-import type { Metadata } from 'next';
+'use client';
+
 import '../styles/globals.css';
-import BodyClassController from './BodyClassController'; // Import the client-side component
+import BodyClassController from './BodyClassController';
 import Fireworks from './Fireworks';
 import { Dancing_Script, Share_Tech_Mono } from 'next/font/google';
-
-export const metadata: Metadata = {
-  title: 'Brianna & Conor',
-  description: "Your source for everything you need to know about Brianna and Conor's wedding!",
-};
+import { useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const dancingScript = Dancing_Script({
   subsets: ['latin'],
-  weight: '400', // or '700' if you want bold too
+  weight: '400',
   variable: '--font-dancing-script',
 });
 
@@ -26,6 +25,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const firstName = Cookies.get('first_name');
+  const lastName = Cookies.get('last_name');
+  const passPhrase = Cookies.get('pass_phrase');
+
+  useEffect(() => {
+    if (!passPhrase && pathname !== '/settings') {
+      router.push('/settings');
+    }
+  }, [passPhrase, pathname, router]);
+
   return (
     <html lang="en" className={dancingScript.variable + ' ' + shareTechMono.variable}>
       <body>
@@ -40,6 +51,14 @@ export default function RootLayout({
             <a href="/registry">Registry</a>
             <a href="/settings">Settings</a>
           </nav>
+          {firstName && lastName && (
+            <div className="text-right pr-4 py-2 text-sm text-gray-600">
+              Visiting as {firstName} {lastName}.{' '}
+              <a href="/settings" className="text-blue-500 hover:underline">
+                Not you? Please tell us who you are on the Settings Page!
+              </a>
+            </div>
+          )}
           {children}
           <Fireworks />
           {/* Sparkly Glitter Mouse Trail */}
