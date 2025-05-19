@@ -42,6 +42,11 @@ export default function RSVP() {
     const passPhrase = Cookies.get('pass_phrase')
     const apiUrl = process.env.NEXT_PUBLIC_SUPABASE_API_URL || ''
     const apiKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+
+    console.log('[RSVP] passPhrase:', passPhrase);
+    console.log('[RSVP] apiUrl:', apiUrl);
+    console.log('[RSVP] apiKey:', apiKey);
+
     if (passPhrase && apiUrl && apiKey) {
       const url = `${apiUrl}/functions/v1/get-rsvps`;
       const headers = {
