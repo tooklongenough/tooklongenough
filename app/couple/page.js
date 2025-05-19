@@ -1,10 +1,72 @@
-export default function Couple() {
+'use client';
+
+import { useState, useEffect } from 'react';
+import { preferences } from '../data/preferences';
+
+export default function CouplePage() {
+  const [activeTab, setActiveTab] = useState('movies');
+
+  const PreferenceItem = ({ item }) => (
+    <div className={`preference-item ${item.preference}`}>
+      {item.name}
+    </div>
+  );
+
+  const PreferenceSection = ({ title, items }) => (
+    <div className="preference-section">
+      <h3>{title}</h3>
+      <div className="preference-grid">
+        {items.map((item, index) => (
+          <PreferenceItem key={index} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+
   return (
-    <main>
-      <h2>About the Couple</h2>
-      <p>Brianna and Conor have been together for 16 years, sharing adventures, laughter, and a love for all things sparkly and neon! ✨💖</p>
-      <p>Brianna is amazing and loves glitter and sparkle! ✨ Conor loves neon lights and 90s tunes! 🎶 Together, they make the perfect team—balancing each other out and making every day a little brighter.</p>
-      <p>They can't wait to celebrate this next chapter with all their favorite people. Thank you for being part of their story! 🥂</p>
-    </main>
-  )
+    <div className="page-transition">
+      <h2>Meet the Couple</h2>
+      
+      <div className="preference-tabs">
+        <button 
+          className={`tab-button ${activeTab === 'movies' ? 'active' : ''}`}
+          onClick={() => setActiveTab('movies')}
+        >
+          Movies
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'shows' ? 'active' : ''}`}
+          onClick={() => setActiveTab('shows')}
+        >
+          Shows
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'restaurants' ? 'active' : ''}`}
+          onClick={() => setActiveTab('restaurants')}
+        >
+          Restaurants
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'creatives' ? 'active' : ''}`}
+          onClick={() => setActiveTab('creatives')}
+        >
+          Creatives
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'music' ? 'active' : ''}`}
+          onClick={() => setActiveTab('music')}
+        >
+          Music
+        </button>
+      </div>
+
+      <div className="preference-content">
+        {activeTab === 'movies' && <PreferenceSection title="Movies We Love" items={preferences.movies} />}
+        {activeTab === 'shows' && <PreferenceSection title="Shows We Binge" items={preferences.shows} />}
+        {activeTab === 'restaurants' && <PreferenceSection title="Our Favorite Restaurants" items={preferences.restaurants} />}
+        {activeTab === 'creatives' && <PreferenceSection title="Creatives We Admire" items={preferences.creatives} />}
+        {activeTab === 'music' && <PreferenceSection title="Music We Listen To" items={preferences.music} />}
+      </div>
+    </div>
+  );
 } 

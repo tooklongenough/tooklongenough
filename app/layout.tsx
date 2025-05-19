@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import BodyClassController from './BodyClassController';
 import Fireworks from './Fireworks';
 import Glitter from './Glitter';
+import PageTransition from './components/PageTransition';
 import { Dancing_Script, Share_Tech_Mono } from 'next/font/google';
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -69,7 +70,9 @@ export default function RootLayout({
               </div>
             )}
           </div>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <Fireworks />
           <Glitter />
         </BodyClassController>

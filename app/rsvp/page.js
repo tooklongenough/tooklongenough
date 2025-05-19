@@ -161,8 +161,8 @@ export default function RSVP() {
     // Handle deletes
     for (const rsvp_id of toDelete) {
       const res = await fetch(deleteEndpoint, {
-        method: 'POST',
-        headers: {
+      method: 'POST',
+      headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`
         },
@@ -400,7 +400,7 @@ export default function RSVP() {
           <button type="submit" className="submit-btn" disabled={submitting}>
             {submitting ? 'Submitting...' : isUpdate ? 'Update RSVP' : 'Send RSVP'}
           </button>
-        </form>
+      </form>
       )}
       {status && (
         <div className={`rsvp-status`} ref={statusRef}>
