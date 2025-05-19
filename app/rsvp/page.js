@@ -29,7 +29,9 @@ export default function RSVP() {
   const isMobile = useIsMobile();
   const statusRef = useRef(null)
 
+  console.log('[RSVP] Component loaded');
   useEffect(() => {
+    console.log('[RSVP] useEffect running');
     const savedFirstName = Cookies.get('first_name')
     const savedLastName = Cookies.get('last_name')
     setIsLoggedIn(!!(savedFirstName && savedLastName))
