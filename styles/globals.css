@@ -213,23 +213,23 @@ body {
   /* Specific page cursors with forced size */
 body.home-page {
     cursor: url('/sparkleheart.png') 16 16, auto; 
-  }
+}
  
-  body.bride-page {
+body.couple-page {
     cursor: url('/hearteyes.png') 16 16, auto; 
-  }
+}
   
-  body.groom-page {
+body.winnipeg-page {
     cursor: url('/hearteyes.png') 16 16, auto;  
-  }
+}
   
-  body.location-page {
+body.location-page {
     cursor: url('/castle.png') 16 16, auto; 
-  }
+}
   
-  body.rsvp-page {
+body.rsvp-page {
     cursor: url('/red100.png') 16 16, auto;  
-  }
+}
 
   .firework-particle {
     position: absolute;

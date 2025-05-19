@@ -52,8 +52,8 @@ export default function RootLayout({
           <header>💖 Brianna & Conor's Wedding 💖</header>
           <nav>
             <a href="/">Home</a>
-            <a href="/bride">Meet the Bride</a>
-            <a href="/groom">Meet the Groom</a>
+            <a href="/couple">Meet the Couple</a>
+            <a href="/winnipeg">Explore Winnipeg</a>
             <a href="/location">St. Norbert Art Centre</a>
             <a href="/rsvp">RSVP</a>
             <a href="/registry">Registry</a>

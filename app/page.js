@@ -13,11 +13,11 @@ export default function Home() {
       </div>
 
       <div className="main-links">
-        <Link href="/bride" className="profile-link">
-          Meet the Bride 👰
+        <Link href="/couple" className="profile-link">
+          Meet the Couple 💑
         </Link>
-        <Link href="/groom" className="profile-link">
-          Meet the Groom 🤵
+        <Link href="/winnipeg" className="profile-link">
+          Explore Winnipeg 🏙️
         </Link>
         <Link href="/location" className="profile-link">
           Visit the Venue 🏰

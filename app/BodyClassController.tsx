@@ -11,10 +11,10 @@ export default function BodyClassController({ children }: { children: React.Reac
 
     if (pathname === '/') {
       className = 'home-page';
-    } else if (pathname.startsWith('/bride')) {
-      className = 'bride-page';
-    } else if (pathname.startsWith('/groom')) {
-      className = 'groom-page';
+    } else if (pathname.startsWith('/couple')) {
+      className = 'couple-page';
+    } else if (pathname.startsWith('/winnipeg')) {
+      className = 'winnipeg-page';
     } else if (pathname.startsWith('/location')) {
       className = 'location-page';
     } else if (pathname.startsWith('/rsvp')) {
