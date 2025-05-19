@@ -47,7 +47,7 @@ export default function RSVP() {
     console.log('[RSVP] apiUrl:', apiUrl);
     console.log('[RSVP] apiKey:', apiKey);
 
-    if (passPhrase && apiUrl && apiKey) {
+    if (passPhrase) {
       const url = `${apiUrl}/functions/v1/get-rsvps`;
       const headers = {
         'Content-Type': 'application/json',
