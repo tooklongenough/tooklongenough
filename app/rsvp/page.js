@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Cookies from 'js-cookie'
 
 // Hook to detect mobile
@@ -24,7 +24,10 @@ export default function RSVP() {
     { rsvp_id: undefined, firstName: '', lastName: '', attending: true, dietary: '' }
   ])
   const [toDelete, setToDelete] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
   const isMobile = useIsMobile();
+  const statusRef = useRef(null)
 
   useEffect(() => {
     const savedFirstName = Cookies.get('first_name')
@@ -38,15 +41,30 @@ export default function RSVP() {
     const apiUrl = process.env.NEXT_PUBLIC_SUPABASE_API_URL || ''
     const apiKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
     if (passPhrase && apiUrl && apiKey) {
-      fetch(`${apiUrl}/functions/v1/get-rsvps`, {
+      const url = `${apiUrl}/functions/v1/get-rsvps`;
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      };
+      const body = JSON.stringify({ pass_phrase: passPhrase });
+      console.log('[RSVP] Fetching RSVPs:', { url, headers, body });
+      fetch(url, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({ pass_phrase: passPhrase })
+        headers,
+        body
       })
-        .then(res => res.json())
+        .then(async res => {
+          console.log('[RSVP] Response status:', res.status);
+          let data;
+          try {
+            data = await res.json();
+            console.log('[RSVP] Response JSON:', data);
+          } catch (e) {
+            console.log('[RSVP] Error parsing JSON:', e);
+            data = null;
+          }
+          return data;
+        })
         .then(data => {
           if (Array.isArray(data) && data.length > 0) {
             setGuests(data.map(rsvp => ({
@@ -65,8 +83,10 @@ export default function RSVP() {
               dietary: ''
             }])
           }
+          setLoading(false)
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log('[RSVP] Fetch error:', err);
           if (savedFirstName && savedLastName) {
             setGuests([{
               rsvp_id: undefined,
@@ -76,6 +96,7 @@ export default function RSVP() {
               dietary: ''
             }])
           }
+          setLoading(false)
         })
     } else if (savedFirstName && savedLastName) {
       setGuests([{
@@ -85,6 +106,9 @@ export default function RSVP() {
         attending: true,
         dietary: ''
       }])
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
   }, [])
 
@@ -111,9 +135,11 @@ export default function RSVP() {
   async function handleSubmit(e) {
     e.preventDefault()
     setStatus('')
+    setSubmitting(true)
     const passPhrase = Cookies.get('pass_phrase')
     if (!passPhrase) {
       setStatus('You must identify yourself on the Settings page before submitting an RSVP.')
+      setSubmitting(false)
       return
     }
     const apiUrl = process.env.NEXT_PUBLIC_SUPABASE_API_URL || ''
@@ -213,7 +239,16 @@ export default function RSVP() {
     } else {
       setStatus('Something went wrong: ' + errorMsg)
     }
+    setSubmitting(false)
+    setTimeout(() => {
+      if (statusRef.current) {
+        statusRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }, 100)
   }
+
+  // Determine if we are updating or creating
+  const isUpdate = guests.some(g => g.rsvp_id)
 
   return (
     <main>
@@ -235,118 +270,136 @@ export default function RSVP() {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="rsvp-form">
-        {isMobile ? (
-          // MOBILE: stacked guest cards
-          guests.map((guest, index) => (
-            <div className="guest-row" key={index}>
-              <div className="guest-field">
-                <label className="guest-label" htmlFor={`firstName-${index}`}>First Name</label>
-                <input
-                  className="guest-input"
-                  id={`firstName-${index}`}
-                  type="text"
-                  value={guest.firstName}
-                  onChange={(e) => updateGuest(index, 'firstName', e.target.value)}
-                  placeholder="First Name"
-                />
-              </div>
-              <div className="guest-field">
-                <label className="guest-label" htmlFor={`lastName-${index}`}>Last Name</label>
-                <input
-                  className="guest-input"
-                  id={`lastName-${index}`}
-                  type="text"
-                  value={guest.lastName}
-                  onChange={(e) => updateGuest(index, 'lastName', e.target.value)}
-                  placeholder="Last Name"
-                  required
-                />
-              </div>
-              <div className="guest-field">
-                <label className="guest-label" htmlFor={`dietary-${index}`}>Dietary Restrictions</label>
-                <input
-                  className="guest-input"
-                  id={`dietary-${index}`}
-                  type="text"
-                  value={guest.dietary}
-                  onChange={(e) => updateGuest(index, 'dietary', e.target.value)}
-                  placeholder="Any dietary restrictions?"
-                />
-              </div>
-              <div className="guest-field">
-                <label className="guest-label" htmlFor={`attending-${index}`}>Attending</label>
-                <select
-                  className="guest-input"
-                  id={`attending-${index}`}
-                  value={guest.attending}
-                  onChange={(e) => updateGuest(index, 'attending', e.target.value === 'true')}
-                >
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-              {/* Delete button, not for first row */}
-              {guests.length > 1 && (
-                <div className="guest-field" style={{textAlign: 'right'}}>
-                  <button type="button" className="delete-guest-btn" onClick={() => deleteGuest(index)} title="Remove guest" style={{color: 'red', fontWeight: 'bold', border: 'none', background: 'none', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1}}>&times;</button>
+      {loading ? (
+        <div style={{textAlign: 'center', margin: '2rem'}}>
+          <span>Loading RSVP data...</span>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="rsvp-form">
+          {isMobile ? (
+            // MOBILE: stacked guest cards
+            guests.map((guest, index) => (
+              <div className="guest-row" key={index}>
+                <div className="guest-field">
+                  <label className="guest-label" htmlFor={`firstName-${index}`}>First Name</label>
+                  <input
+                    className="guest-input"
+                    id={`firstName-${index}`}
+                    type="text"
+                    value={guest.firstName}
+                    onChange={(e) => updateGuest(index, 'firstName', e.target.value)}
+                    placeholder="First Name"
+                    disabled={submitting}
+                  />
                 </div>
-              )}
-            </div>
-          ))
-        ) : (
-          // DESKTOP: grid with headers
-          <div className="rsvp-grid">
-            <div className="grid-header">First Name</div>
-            <div className="grid-header">Last Name</div>
-            <div className="grid-header">Dietary Restrictions</div>
-            <div className="grid-header">Attending</div>
-            {guests.map((guest, index) => (
-              <React.Fragment key={index}>
-                <input
-                  type="text"
-                  value={guest.firstName}
-                  onChange={(e) => updateGuest(index, 'firstName', e.target.value)}
-                  placeholder="First Name"
-                />
-                <input
-                  type="text"
-                  value={guest.lastName}
-                  onChange={(e) => updateGuest(index, 'lastName', e.target.value)}
-                  placeholder="Last Name"
-                  required
-                />
-                <input
-                  type="text"
-                  value={guest.dietary}
-                  onChange={(e) => updateGuest(index, 'dietary', e.target.value)}
-                  placeholder="Any dietary restrictions?"
-                />
-                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                <div className="guest-field">
+                  <label className="guest-label" htmlFor={`lastName-${index}`}>Last Name</label>
+                  <input
+                    className="guest-input"
+                    id={`lastName-${index}`}
+                    type="text"
+                    value={guest.lastName}
+                    onChange={(e) => updateGuest(index, 'lastName', e.target.value)}
+                    placeholder="Last Name"
+                    required
+                    disabled={submitting}
+                  />
+                </div>
+                <div className="guest-field">
+                  <label className="guest-label" htmlFor={`dietary-${index}`}>Dietary Restrictions</label>
+                  <input
+                    className="guest-input"
+                    id={`dietary-${index}`}
+                    type="text"
+                    value={guest.dietary}
+                    onChange={(e) => updateGuest(index, 'dietary', e.target.value)}
+                    placeholder="Any dietary restrictions?"
+                    disabled={submitting}
+                  />
+                </div>
+                <div className="guest-field">
+                  <label className="guest-label" htmlFor={`attending-${index}`}>Attending</label>
                   <select
+                    className="guest-input"
+                    id={`attending-${index}`}
                     value={guest.attending}
                     onChange={(e) => updateGuest(index, 'attending', e.target.value === 'true')}
+                    disabled={submitting}
                   >
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
-                  {/* Delete button, not for first row */}
-                  {guests.length > 1 && (
-                    <button type="button" className="delete-guest-btn" onClick={() => deleteGuest(index)} title="Remove guest" style={{color: 'red', fontWeight: 'bold', border: 'none', background: 'none', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1}}>&times;</button>
-                  )}
                 </div>
-              </React.Fragment>
-            ))}
-          </div>
-        )}
-        <button type="button" onClick={addGuest} className="add-guest-btn">
-          + Add Guest
-        </button>
-        <button type="submit" className="submit-btn">
-          Send RSVP
-        </button>
-      </form>
-      <p>{status}</p>
+                {/* Delete button, not for first row */}
+                {guests.length > 1 && (
+                  <div className="guest-field" style={{textAlign: 'right'}}>
+                    <button type="button" className="delete-guest-btn" onClick={() => deleteGuest(index)} title="Remove guest" style={{color: 'red', fontWeight: 'bold', border: 'none', background: 'none', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1}}>&times;</button>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            // DESKTOP: grid with headers
+            <div className="rsvp-grid">
+              <div className="grid-header">First Name</div>
+              <div className="grid-header">Last Name</div>
+              <div className="grid-header">Dietary Restrictions</div>
+              <div className="grid-header">Attending</div>
+              {guests.map((guest, index) => (
+                <React.Fragment key={index}>
+                  <input
+                    type="text"
+                    value={guest.firstName}
+                    onChange={(e) => updateGuest(index, 'firstName', e.target.value)}
+                    placeholder="First Name"
+                    disabled={submitting}
+                  />
+                  <input
+                    type="text"
+                    value={guest.lastName}
+                    onChange={(e) => updateGuest(index, 'lastName', e.target.value)}
+                    placeholder="Last Name"
+                    required
+                    disabled={submitting}
+                  />
+                  <input
+                    type="text"
+                    value={guest.dietary}
+                    onChange={(e) => updateGuest(index, 'dietary', e.target.value)}
+                    placeholder="Any dietary restrictions?"
+                    disabled={submitting}
+                  />
+                  <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                    <select
+                      value={guest.attending}
+                      onChange={(e) => updateGuest(index, 'attending', e.target.value === 'true')}
+                      disabled={submitting}
+                    >
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                    {/* Delete button, not for first row */}
+                    {guests.length > 1 && (
+                      <button type="button" className="delete-guest-btn" onClick={() => deleteGuest(index)} title="Remove guest" style={{color: 'red', fontWeight: 'bold', border: 'none', background: 'none', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1}}>&times;</button>
+                    )}
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+          <button type="button" onClick={addGuest} className="add-guest-btn" disabled={submitting}>
+            + Add Guest
+          </button>
+          <button type="submit" className="submit-btn" disabled={submitting}>
+            {submitting ? 'Submitting...' : isUpdate ? 'Update RSVP' : 'Send RSVP'}
+          </button>
+        </form>
+      )}
+      {status && (
+        <div className={`rsvp-status`} ref={statusRef}>
+          {status}
+        </div>
+      )}
     </main>
   )
 }
