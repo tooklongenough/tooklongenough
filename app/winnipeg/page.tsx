@@ -217,6 +217,19 @@ export default function WinnipegPage() {
               </div>
 
               <div>
+                <a href="https://www.theforks.com/events/calendar-of-events/list/2025/9/30" target="_blank" rel="noopener noreferrer"><h3 className="text-xl font-bold mb-2">Orange Shirt Day</h3></a>
+                <p className="mb-4">
+                  There is always something organized for Orange Shirt Day at the Forks in Winnipeg.  
+                  Hear from residential school survivors.  Walk for healing.  Winnipeg is on Treaty 1 territory, and we
+                  would not be able to build our family here without the treaties we are bound to honour.
+                </p>
+
+                <p className="text-sm text-gray-600">
+                  Date: September 30, 2025 at The Forks
+                </p>
+              </div>
+
+              <div>
                 <h3 className="text-xl font-bold mb-2">Group Activities</h3>
                 <p className="mb-4">
                   We're planning some fun group activities for our who arrive in town early.
