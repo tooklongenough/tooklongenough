@@ -46,7 +46,13 @@ export default function WinnipegPage() {
                 className={`hotel-tile${index % 2 !== 0 ? ' reverse' : ''} ${hotel.color === 'primary' ? ' bg-primary' : ' bg-secondary'}`}
               >
                 <div className="hotel-tile__name">
-                  <h2>{hotel.name}</h2>
+                  {hotel.url ? (
+                    <a href={hotel.url} target="_blank" rel="noopener noreferrer">
+                      <h2>{hotel.name}</h2>
+                    </a>
+                  ) : (
+                    <h2>{hotel.name}</h2>
+                  )}
                 </div>
                 <div className="hotel-tile__image">
                   <img
