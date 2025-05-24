@@ -9,6 +9,7 @@ import { Dancing_Script, Share_Tech_Mono } from 'next/font/google';
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { trackVisit } from './utils/visitTracker';
 
 const dancingScript = Dancing_Script({
   subsets: ['latin'],
@@ -34,6 +35,11 @@ export default function RootLayout({
   const passPhrase = Cookies.get('pass_phrase');
 
   useEffect(() => {
+    // Track the visit
+    trackVisit(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
     // Load the glitter script dynamically
     const script = document.createElement('script');
     script.src = '/glitter.js';
@@ -48,6 +54,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={dancingScript.variable + ' ' + shareTechMono.variable}>
+      <head>
+        <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap" rel="stylesheet" />
+      </head>
       <body>
         <BodyClassController>
           <header>💖 Brianna & Conor's Wedding 💖</header>
