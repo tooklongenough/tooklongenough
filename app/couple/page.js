@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { preferences } from '../data/preferences';
+import RestaurantGrid from '../components/RestaurantGrid';
 
 function getSearchUrl(category, name) {
   if (category === 'movies' || category === 'shows') {
@@ -188,7 +189,7 @@ export default function CouplePage() {
           )}
           {activeTab === 'movies' && <PreferenceSection title="Movies We Love" items={preferences.movies} category="movies" />}
           {activeTab === 'shows' && <PreferenceSection title="Shows We Binge" items={preferences.shows} category="shows" />}
-          {activeTab === 'restaurants' && <PreferenceSection title="Our Favorite Restaurants" items={preferences.restaurants} category="restaurants" />}
+          {activeTab === 'restaurants' && <RestaurantGrid restaurants={preferences.restaurants} />}
           {activeTab === 'creatives' && <PreferenceSection title="Creatives We Admire" items={preferences.creatives} category="creatives" />}
         </div>
       </main>

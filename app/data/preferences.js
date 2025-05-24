@@ -112,8 +112,13 @@ export const preferences = {
     { name: "Verde", preference: 'couple', description: 'Vegan friendly cafe with sandwiches and smoothies nearby.' },
     { name: "Wannabe's Diner", preference: 'couple', description: 'Very affordable breakfast; cash only, no Sundays.' },
     { name: "Organic Planet", preference: 'couple', description: 'Healthfood store with a deli inside; try the tofu.' },
-    { name: "gâto", preference: 'couple', description: 'Vegan friendly bakery with savoury and sweet pastries.' }
-
+    { name: "gâto", preference: 'couple', description: 'Vegan friendly bakery with savoury and sweet pastries.' },
+    { name: "Shorty's", preference: 'couple', description: 'Great pizza on the slightly fancier side.' },
+    { name: "Little Pizza Heaven", preference: 'couple', description: 'Great pizza if garlic crust is your jam.' },
+    { name: "Aladin's", preference: 'couple', description: 'Late night taco pizza right next to the house.' },
+    { name: "Wall Street Slices", preference: 'couple', description: 'More great pizza.' },
+    { name: "Next Door", preference: 'couple', description: 'Yummy menu, sister restaurant to and right next door to Good Neighbour brewery.' },
+    { name: "Burrito del Rio", preference: 'couple', description: 'Best burritos in the city.' }
   ],
   creatives: [
     { name: 'bell hooks', preference: 'bride', description: 'Influential author and feminist cultural critic.' },

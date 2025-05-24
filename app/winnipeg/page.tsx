@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { hotels, attractions } from '../data/winnipeg';
+import { preferences } from '../data/preferences';
+import RestaurantGrid from '../components/RestaurantGrid';
 
 export default function WinnipegPage() {
   const [activeTab, setActiveTab] = useState('stay');
@@ -29,6 +31,12 @@ export default function WinnipegPage() {
             onClick={() => setActiveTab('see')}
           >
             What to See
+          </button>
+          <button
+            className={`tab-button${activeTab === 'eat' ? ' active' : ''}`}
+            onClick={() => setActiveTab('eat')}
+          >
+            What to Eat
           </button>
           <button
             className={`tab-button${activeTab === 'events' ? ' active' : ''}`}
@@ -156,6 +164,7 @@ export default function WinnipegPage() {
             ))}
           </div>
         )}
+        {activeTab === 'eat' && <RestaurantGrid restaurants={preferences.restaurants} />}
         {activeTab === 'events' && (
           <div className="preference-section space-y-8">
             <div>
