@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { hotels } from '../data/winnipeg';
+import { hotels, attractions } from '../data/winnipeg';
 
 export default function WinnipegPage() {
   const [activeTab, setActiveTab] = useState('stay');
@@ -46,13 +46,20 @@ export default function WinnipegPage() {
                 className={`hotel-tile${index % 2 !== 0 ? ' reverse' : ''} ${hotel.color === 'primary' ? ' bg-primary' : ' bg-secondary'}`}
               >
                 <div className="hotel-tile__name">
-                  {hotel.url ? (
-                    <a href={hotel.url} target="_blank" rel="noopener noreferrer">
-                      <h2>{hotel.name}</h2>
-                    </a>
-                  ) : (
-                    <h2>{hotel.name}</h2>
-                  )}
+                  <span style={{display: 'inline-flex', alignItems: 'center', gap: 8}}>
+                    {hotel.url ? (
+                      <a href={hotel.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <h2 style={{ display: 'inline', margin: 0 }}>{hotel.name}</h2>
+                      </a>
+                    ) : (
+                      <h2 style={{ display: 'inline', margin: 0 }}>{hotel.name}</h2>
+                    )}
+                    {hotel.maps && (
+                      <a href={hotel.maps} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', marginLeft: 8, fontSize: '1.1em', verticalAlign: 'middle' }} title="View on Google Maps">
+                        (map 🗺️)
+                      </a>
+                    )}
+                  </span>
                 </div>
                 <div className="hotel-tile__image">
                   <img
@@ -109,35 +116,44 @@ export default function WinnipegPage() {
         )}
         {activeTab === 'see' && (
           <div className="preference-section space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Must-See Attractions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-2">The Forks</h3>
-                  <p className="mb-4">
-                    Winnipeg's historic meeting place, featuring:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2">
-                    <li>Canadian Museum for Human Rights</li>
-                    <li>Market food hall</li>
-                    <li>Riverwalk</li>
-                    <li>Local shops and restaurants</li>
-                  </ul>
+            {attractions.map((attraction, index) => (
+              <div
+                key={attraction.name}
+                className={`hotel-tile${index % 2 !== 0 ? ' reverse' : ''} ${attraction.color === 'primary' ? ' bg-primary' : ' bg-secondary'}`}
+              >
+                <div className="hotel-tile__name">
+                  <span style={{display: 'inline-flex', alignItems: 'center', gap: 8}}>
+                    {attraction.url ? (
+                      <a href={attraction.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <h2 style={{ display: 'inline', margin: 0 }}>{attraction.name}</h2>
+                      </a>
+                    ) : (
+                      <h2 style={{ display: 'inline', margin: 0 }}>{attraction.name}</h2>
+                    )}
+                    {attraction.maps && (
+                      <a href={attraction.maps} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', marginLeft: 8, fontSize: '1.1em', verticalAlign: 'middle' }} title="View on Google Maps">
+                        (map 🗺️)
+                      </a>
+                    )}
+                  </span>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Exchange District</h3>
-                  <p className="mb-4">
-                    National Historic Site with:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2">
-                    <li>Historic architecture</li>
-                    <li>Art galleries</li>
-                    <li>Boutique shops</li>
-                    <li>Trendy restaurants</li>
+                <div className="hotel-tile__image">
+                  <img
+                    src={attraction.image}
+                    alt={attraction.name}
+                    style={{ borderRadius: '8px', maxWidth: '100%', height: 'auto', maxHeight: '220px', display: 'block', margin: '0 auto' }}
+                  />
+                </div>
+                <div className="hotel-tile__desc">
+                  <p style={{ marginBottom: '1rem', color: '#7fff00', fontWeight: 'bold' }}>{attraction.description}</p>
+                  <ul style={{ paddingLeft: '1.2em' }}>
+                    {attraction.details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         )}
         {activeTab === 'events' && (
