@@ -51,7 +51,7 @@ const YouTubeIcon = () => (
 );
 
 export default function CouplePage() {
-  const [activeTab, setActiveTab] = useState('movies');
+  const [activeTab, setActiveTab] = useState('music');
   const [activeBio, setActiveBio] = useState('family');
 
   const PreferenceItem = ({ item, category }) => {
@@ -102,16 +102,21 @@ export default function CouplePage() {
     );
   };
 
-  const PreferenceSection = ({ title, items, category }) => (
-    <div className="preference-section">
-      <h3>{title}</h3>
-      <div className="preference-grid">
-        {items.map((item, index) => (
-          <PreferenceItem key={index} item={item} category={category} />
-        ))}
+  const PreferenceSection = ({ title, items, category }) => {
+    // Sort items alphabetically by name
+    const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
+    
+    return (
+      <div className="preference-section">
+        <h3>{title}</h3>
+        <div className="preference-grid">
+          {sortedItems.map((item, index) => (
+            <PreferenceItem key={index} item={item} category={category} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="page-transition">
@@ -171,11 +176,16 @@ export default function CouplePage() {
             className={`tab-button ${activeTab === 'creatives' ? 'active' : ''}`}
             onClick={() => setActiveTab('creatives')}
           >
-            Creatives
+            Writers, Artists, etc.
           </button>
         </div>
         <div className="preference-content">
-          {activeTab === 'music' && <PreferenceSection title="Music We Listen To" items={preferences.music} category="music" />}
+          {activeTab === 'music' && (
+            <>
+              <PreferenceSection title="Local Artists" items={preferences.music.local} category="music" />
+              <PreferenceSection title="Other Artists" items={preferences.music.other} category="music" />
+            </>
+          )}
           {activeTab === 'movies' && <PreferenceSection title="Movies We Love" items={preferences.movies} category="movies" />}
           {activeTab === 'shows' && <PreferenceSection title="Shows We Binge" items={preferences.shows} category="shows" />}
           {activeTab === 'restaurants' && <PreferenceSection title="Our Favorite Restaurants" items={preferences.restaurants} category="restaurants" />}
