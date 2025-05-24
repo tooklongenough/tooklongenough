@@ -70,6 +70,7 @@ body {
   main {
     width: 60%;
     margin: 0 auto;  /* Centers the content */
+    background: rgba(255,255,255,0.05);
   }
   
   main h2 {
@@ -1019,10 +1020,6 @@ body.rsvp-page {
     width: 60%;
     margin: 2rem auto;
     padding: 2rem;
-    border: 2px dashed var(--accent-color, currentColor);
-    border-radius: 16px;
-    background: rgba(255,255,255,0.05);
-    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
   }
 
   @media (max-width: 768px) {
@@ -1077,4 +1074,63 @@ body.rsvp-page {
       max-width: 98vw;
       margin-bottom: 1rem;
     }
+  }
+
+  /* Hotel tile grid layout for Winnipeg page */
+  .hotel-tile {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "name name"
+      "image desc";
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+  }
+  .hotel-tile__name {
+    grid-area: name;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .hotel-tile__name h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #39ff14;
+    margin: 0;
+  }
+  .hotel-tile__image {
+    grid-area: image;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hotel-tile__desc {
+    grid-area: desc;
+  }
+  .hotel-tile.reverse {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "name name"
+      "desc image";
+  }
+  @media (max-width: 768px) {
+    .hotel-tile, .hotel-tile.reverse {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "name"
+        "image"
+        "desc";
+    }
+    .hotel-tile__name {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .bg-primary {
+    background: rgba(57,255,20,0.07);
+  }
+  .bg-secondary {
+    background: rgba(0,255,255,0.07);
   }
