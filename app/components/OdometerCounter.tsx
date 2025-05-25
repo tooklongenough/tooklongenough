@@ -69,10 +69,9 @@ export default function OdometerCounter() {
   }, [count]);
 
   return (
-    <div className="text-center text-sm text-gray-500 mt-4">
-      <div className="font-mono text-lg">
-        {display} visitors
-      </div>
+    <div className="odometer-counter">
+      <span className="odometer-label">Page visits:</span>
+      <span className="odometer-number">{display}</span>
     </div>
   );
 } 

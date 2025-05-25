@@ -1134,3 +1134,37 @@ body.rsvp-page {
   .bg-secondary {
     background: rgba(0,255,255,0.07);
   }
+
+  /* Odometer Counter Styles */
+  .odometer-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    font-size: 1.25rem;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .odometer-label {
+    margin-right: 0.75em;
+    color: inherit;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  .odometer-number {
+    display: inline-block;
+    min-width: 5ch;
+    padding: 0.3em 1.2em;
+    border: 2px solid currentColor;
+    border-radius: 0.5em;
+    font-family: inherit;
+    font-size: 2rem;
+    font-variant-numeric: tabular-nums;
+    background: rgba(0,0,0,0.07);
+    text-align: center;
+    letter-spacing: 0.15em;
+    color: inherit;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
