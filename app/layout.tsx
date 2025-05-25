@@ -83,7 +83,7 @@ export default function RootLayout({
           </div>
           <PageTransition>
             {children}
-            <OdometerCounter route={pathname} />
+            <OdometerCounter />
           </PageTransition>
           <Fireworks />
           <Glitter />
