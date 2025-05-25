@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import CountdownTimer from './components/CountdownTimer'
+import GuestBookForm from './components/GuestBookForm'
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
       </div>
 
       <CountdownTimer />
+      <GuestBookForm />
     </main>
   )
 }
