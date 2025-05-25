@@ -1,13 +1,15 @@
+'use client';
+
 import React from 'react';
 
-function getEmojis(pref) {
+function getEmojis(pref : string) {
   if (pref === 'groom') return '♌️';
   if (pref === 'bride') return '♍️';
   if (pref === 'couple') return '♌️♍️';
   return null;
 }
 
-export default function RestaurantGrid({ restaurants }) {
+export default function RestaurantGrid({ restaurants }: { restaurants: Array<{name: string, preference: string, description: string}> }) {
   // Sort alphabetically by name
   const sorted = [...restaurants].sort((a, b) => a.name.localeCompare(b.name));
   return (

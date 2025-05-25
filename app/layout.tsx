@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { trackVisit } from './utils/visitTracker';
+import OdometerCounter from './components/OdometerCounter';
 
 const dancingScript = Dancing_Script({
   subsets: ['latin'],
@@ -82,6 +83,7 @@ export default function RootLayout({
           </div>
           <PageTransition>
             {children}
+            <OdometerCounter route={pathname} />
           </PageTransition>
           <Fireworks />
           <Glitter />
