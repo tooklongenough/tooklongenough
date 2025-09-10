@@ -1293,3 +1293,21 @@ body.rsvp-page {
       border-radius: 0.5em;
     }
   }
+
+  .day-of {
+    text-align: center;
+  }
+
+  .schedule {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .scheduled-time {
+    font-weight: bolder;
+    padding: 0 0 10 10;
+  }
+
+  .bad-words {
+    font-weight: bold;
+  }

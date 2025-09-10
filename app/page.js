@@ -8,6 +8,21 @@ export default function Home() {
       <h1>Conor & Brianna's Wedding 🎉</h1>
       <h2>September 29, 2025 💍</h2>
       
+      <div className="day-of">
+        <h3>Dress However You Like</h3>
+        <h3>If you have cool dance party toys, like hula hoops or poi, please bring!</h3>
+        <ul className="schedule">
+          <li><span className="scheduled-time">4:00pm</span> -- Doors Open</li>
+          <li><span className="scheduled-time">4:30pm</span> -- Ceremony Begins</li>
+          <li><span className="scheduled-time">5:00pm</span> -- Cocktail Hour</li>
+          <li><span className="scheduled-time">6:00pm</span> -- Dinner</li>
+          <li><span className="scheduled-time">7:00pm</span> -- Speeches</li>
+          <li><span className="scheduled-time">7:30pm</span> -- Dance</li>
+          <li><span className="scheduled-time">8:00pm</span> -- Dance but the music might also have <span className="bad-words">bad words</span></li>
+          <li><span className="scheduled-time">12:00am</span> -- Closing Time</li>
+        </ul>
+      </div>
+
       <div className="couple-intro">
         <p>After 16 years of blissful togetherness, we're finally making it official! 💑</p>
         <p>Why now, you ask? Well, with all this talk of US annexation, we figured we'd better secure those spousal privileges while we still can! 🇨🇦</p>
