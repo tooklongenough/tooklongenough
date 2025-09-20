@@ -10,6 +10,7 @@ export default function Home() {
       
       <div className="day-of">
         <h3>Dress However You Like</h3>
+        <p>The dance and ceremony will both be outdoors, weather permitting.  Tables will still be setup indoors during the dance for people who'd rather spend time inside.</p>
         <h3>If you have cool dance party toys, like hula hoops or poi, please bring!</h3>
         <ul className="schedule">
           <li><span className="scheduled-time">4:00pm</span> -- Doors Open</li>
@@ -21,6 +22,10 @@ export default function Home() {
           <li><span className="scheduled-time">8:00pm</span> -- Dance but the music might also have <span className="bad-words">bad words</span></li>
           <li><span className="scheduled-time">12:00am</span> -- Closing Time</li>
         </ul>
+        <p>If children decide they need to run around, sing, and do all the things children do during the ceremony please don't feel like you need to stop them on our behalf.  We're certainly not going to kick our own guy out, and we wouldn't want you to have to, either! </p>
+        <p>Dinner will be a buffet and the meat is pork.  People who have indicated they do not eat meat / pork will receive a vegetarian alternative.  We will not have a wedding cake. </p>
+        <p>The bar is open, and is limited to beer, coolers, and wine.  If you want something else there's probably nobody watching out for your flask. </p>
+        <p>During dinner, we will have two kids' tables setup on the screened patios outside.  There will be a babysitter at each table to make sure nobody's getting hurt, but an approximate 8:1 ratio will only allow so much attention per child.  We anticipate there will be fluid movement of children coming in and eating on parents' laps and parents going out to see what their children are up to.  Dietary restrictions will be taken care of according to the seating chart, so trying to follow the chart when dinner is being served is appreciated.</p>
       </div>
 
       <div className="couple-intro">

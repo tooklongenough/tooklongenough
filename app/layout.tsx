@@ -68,7 +68,6 @@ export default function RootLayout({
             <a href="/winnipeg">Explore Winnipeg</a>
             <a href="/location">St. Norbert Art Centre</a>
             <a href="/rsvp">RSVP</a>
-            <a href="/registry">Registry</a>
             <a href="/settings">Settings</a>
           </nav>
           <div className="logged-in-as">
